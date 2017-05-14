@@ -31,6 +31,8 @@
 	<string>App would like to use your location for the weather.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>May we use your location to fetch the weather?</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>App would like to use your location for the weather.</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>UILaunchStoryboardName</key>

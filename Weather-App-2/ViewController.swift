@@ -116,6 +116,7 @@ class ViewController: UIViewController,
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
+        self.getGPSLocation()
     }
 
     override func didReceiveMemoryWarning() {
