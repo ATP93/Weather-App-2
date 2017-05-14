@@ -57,120 +57,8 @@ class ViewController: UIViewController,
     
     @IBAction func cityButtonTapped(_ sender: AnyObject) {
         print("City button")
-        openSetWeatherAlert()
+        self.getGPSLocation()
     }
-    
-    
-    
-    /** This method opens an alert dialog and asks for the city name, or location. */
-    
-    func openSetWeatherAlert() {
-        let alert = UIAlertController(title: "Get Weather", message: "Enter City, or use your location!", preferredStyle: .alert)
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        let ok = UIAlertAction(title: "OK", style: .default) { (action: UIAlertAction) -> Void in
-            let textField = alert.textFields![0]
-            let city = textField.text
-            self.weatherService.getWeatherForCity(city!)
-        }
-        
-        let location = UIAlertAction(title: "Use Location", style: .default) { (action: UIAlertAction) -> Void in
-            //
-            self.getGPSLocation()
-        }
-        
-        alert.addTextField { (textField: UITextField) -> Void in
-            textField.placeholder = "City Name, Country"
-        }
-        
-        alert.addAction(cancel)
-        alert.addAction(ok)
-        alert.addAction(location)
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    
-    // -- Photo Button
-    /** Opens the photo picker */
-    @IBAction func photoButtonTapped(_ sender: AnyObject) {
-        self.openPhotoPicker()
-    }
-    
-    /** Open a photo picker to add an image or take a photo */
-    func openPhotoPicker() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = false
-        picker.sourceType = .camera
-        self.present(picker, animated: true, completion: nil)
-    }
-    
-    /** Handles results from the photopicker. */
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        self.backgroundImageView.image = image
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    /** Use this button to share the weather on Twitter, Email, or SMS */
-    @IBAction func shareButtonTapped(_ sender: AnyObject) {
-        // open sharing alert
-        // Tweet
-        // Email
-        // SMS
-        openSharingAlert()
-    }
-    
-    /** Opens an Actionsheet with sharing options. */
-    func openSharingAlert() {
-        let alert = UIAlertController(title: "Share the Weather", message: "", preferredStyle: .actionSheet)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let tweet = UIAlertAction(title: "Tweet", style: .default) { (action: UIAlertAction) -> Void in
-            //
-            self.tweetWeather()
-        }
-        let email = UIAlertAction(title: "Email", style: .default) { (action:UIAlertAction) -> Void in
-            // 
-            self.emailWeather()
-        }
-        let sms = UIAlertAction(title: "SMS", style: .default) { (action: UIAlertAction) -> Void in
-            // 
-            self.smsWeather()
-        }
-        
-        alert.addAction(cancel)
-        alert.addAction(tweet)
-        alert.addAction(email)
-        alert.addAction(sms)
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    /** Use this method to Tweet the weather. */
-    func tweetWeather() {
-        print("Tweet the Weather")
-        // TODO: Format weather for Tweet
-        // TODO: Send Tweet
-        // TODO: Make Screenshot
-    }
-    
-    /** Use this method to Email the weather. */
-    func emailWeather() {
-        print("Email the Weather")
-        // TODO: Format attributed text for email
-        // TODO: Send Email
-        // TODO: Get screenshot
-    }
-    
-    /** Use this method to test message the weather. */
-    func smsWeather() {
-        print("SMS the Weather")
-        // TOOD: Format weather as message 
-        // TODO: Send message
-    }
-    
-    
     
     
     // MARK: Location 
@@ -193,9 +81,6 @@ class ViewController: UIViewController,
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("location error \(error) \(String(describing: error._userInfo))")
     }
-    
-    
-    
     
     // MARK: WeatherService Delegate methods
     /** Handles error message from Weather Service instance. */
@@ -220,23 +105,6 @@ class ViewController: UIViewController,
         
         self.weather = weather
     }
-    
-    
-    
-    // MARK: Screenshot
-    
-    func takeScreenshot(_ theView: UIView) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(theView.bounds.size, true, 0.0)
-        theView.drawHierarchy(in: theView.bounds, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return image!
-    }
-    
-    
-    
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()

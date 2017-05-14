@@ -26,10 +26,12 @@ class WeatherService {
     // Set your appid
     var appid : String
     var delegate: WeatherServiceDelegate?
+    var client: Sweather?
     
     /** Initial a WeatherService instance with your OpenWeatherMap app id. */
     init(appid: String) {
         self.appid = appid
+        self.client = Sweather(apiKey: appid)
     }
     
     /** Formats an API call to the OpenWeatherMap service. Pass in a CLLocation to retrieve weather data for that location.  */
