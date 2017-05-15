@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5E62F0151EC916C300C15796 /* Sweather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E62F0141EC916C300C15796 /* Sweather.swift */; };
-		7B139BB11BF65E9100F1D281 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B139BB01BF65E9100F1D281 /* StringExtension.swift */; };
 		7B139BB31BF65F7700F1D281 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B139BB21BF65F7700F1D281 /* WeatherService.swift */; };
 		7B139BB51BF65FE200F1D281 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B139BB41BF65FE200F1D281 /* Weather.swift */; };
 		7B139BB91BF6D79400F1D281 /* WeatherServiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B139BB81BF6D79400F1D281 /* WeatherServiceDelegate.swift */; };
@@ -41,7 +40,6 @@
 
 /* Begin PBXFileReference section */
 		5E62F0141EC916C300C15796 /* Sweather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sweather.swift; sourceTree = "<group>"; };
-		7B139BB01BF65E9100F1D281 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		7B139BB21BF65F7700F1D281 /* WeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherService.swift; path = ../WeatherService.swift; sourceTree = "<group>"; };
 		7B139BB41BF65FE200F1D281 /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Weather.swift; path = ../Weather.swift; sourceTree = "<group>"; };
 		7B139BB81BF6D79400F1D281 /* WeatherServiceDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherServiceDelegate.swift; path = ../WeatherServiceDelegate.swift; sourceTree = "<group>"; };
@@ -136,7 +134,6 @@
 				7B139BB21BF65F7700F1D281 /* WeatherService.swift */,
 				7B139BB41BF65FE200F1D281 /* Weather.swift */,
 				5E62F0141EC916C300C15796 /* Sweather.swift */,
-				7B139BB01BF65E9100F1D281 /* StringExtension.swift */,
 				7BFBFCE41BF5003A00F72B29 /* Main.storyboard */,
 				7BFBFCF71BF502CB00F72B29 /* Weather.storyboard */,
 				7BFBFCEA1BF5003A00F72B29 /* Assets.xcassets */,
@@ -240,7 +237,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B139BB31BF65F7700F1D281 /* WeatherService.swift in Sources */,
-				7B139BB11BF65E9100F1D281 /* StringExtension.swift in Sources */,
 				7BFBFCE91BF5003A00F72B29 /* Weather_App_2.xcdatamodeld in Sources */,
 				5E62F0151EC916C300C15796 /* Sweather.swift in Sources */,
 				7B139BB91BF6D79400F1D281 /* WeatherServiceDelegate.swift in Sources */,
