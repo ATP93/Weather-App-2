@@ -2,34 +2,17 @@
 //  ViewController.swift
 //  Weather-App-2
 //
-//  Created by mitchell hudson on 11/12/15.
-//  Copyright © 2015 mitchell hudson. All rights reserved.
+//  Created by Iveta Škorpilová on 14.05.17.
+//  Copyright © 2017 Iveta Škorpilová. All rights reserved.
 //
 
-//  Last Update 020516
-
-// TODO: Clear initial screen, show button to load weather.
-// TODO: Save weather location in NSUserDefaults
-// TODO: Add SMS
-// TODO: Add email
-// TODO: Tweet Weather
-// TODO: Email Image of Weather
-
-// Get location for weather
-
 import UIKit
+import CoreLocation
 import Social
-import CoreLocation // 1 import CoreLocation
 
-// 4 Add Persmission Keys to info plist 
-// “NSLocationWhenInUseUsageDescription” or “NSLocationAlwaysUsageDescription”
-
-// 2 Add the delegate protocol
 class ViewController: UIViewController,
     CLLocationManagerDelegate,
-    WeatherServiceDelegate,
-    UIImagePickerControllerDelegate, // For image picker
-    UINavigationControllerDelegate {   // For image picker
+    WeatherServiceDelegate {   // For image picker
     
     // 3 Make a location manager
     let locationManager = CLLocationManager()
@@ -96,7 +79,7 @@ class ViewController: UIViewController,
         let numberFormatter = NumberFormatter()
         self.descriptionLabel.text = weather.description
         
-        self.tempLabel.text = numberFormatter.string(from: NSNumber(value:weather.tempF))!
+        self.tempLabel.text = numberFormatter.string(from: NSNumber(value:weather.tempC))!
         self.humidityLabel.text = "Humidity: \(numberFormatter.string(from: NSNumber(value:weather.humidity))!)%"
         self.windLabel.text = "Wind: \(numberFormatter.string(from: NSNumber(value:weather.windSpeed))!)mph"
         self.iconImageView.image = UIImage(named: weather.icon)

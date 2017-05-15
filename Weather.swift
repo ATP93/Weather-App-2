@@ -2,27 +2,9 @@
 //  Weather.swift
 //  Weather-App-Example
 //
-//  Created by mitchell hudson on 10/6/15.
-//  Copyright © 2015 mitchell hudson. All rights reserved.
+//  Created by Iveta Škorpilová on 14.05.17.
+//  Copyright © 2017 Iveta Škorpilová. All rights reserved.
 //
-
-
-/* 
- 
- This struct creates an object that represents the weather for a city.
- All of the properties here are values describing the weather with
- couple points of interest.
-
- icon, a string, holds the name of weather status. This names is supplied by OpenWeatherMap. 
- For a list of possible values see Icon List: http://openweathermap.org/weather-conditions
- 
- temp, holds the temperature in Kelvin. 
- tempF and tempC are computed properties that return temp in Farenheit, and Celsius. 
- 
- Note: tempMin, and tempMax are not as intersting as they sound, see the notes on these in 
- the OpenWeatherMap API. 
- 
-*/
 
 
 import Foundation
@@ -44,40 +26,22 @@ struct Weather {
     
     var tempC: Double {
         get {
-            return temp - 273.15
-        }
-    }
-    
-    var tempF: Double {
-        get {
-            return tempC * 9/5 + 32
+            return ((temp - 32)*(5/9))
         }
     }
     
     var tempMinC: Double {
         get {
-            return tempMin - 273.15
+            return ((temp - 32)*(5/9))
         }
     }
     
     var tempMaxC: Double {
         get {
-            return tempMax  - 273.15
+            return ((temp - 32)*(5/9))
         }
     }
-    
-    
-    var tempMinF: Double {
-        get {
-            return tempMinC * 9/5 + 32
-        }
-    }
-    
-    var tempMaxF: Double {
-        get {
-            return tempMaxC * 9/5 + 32
-        }
-    }
+
     
     
     init(cityName: String,

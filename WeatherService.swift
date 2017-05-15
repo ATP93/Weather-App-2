@@ -2,21 +2,9 @@
 //  WeatherService.swift
 //  Weather-App-Example
 //
-//  Created by mitchell hudson on 10/6/15.
-//  Copyright © 2015 mitchell hudson. All rights reserved.
+//  Created by Iveta Škorpilová on 14.05.17.
+//  Copyright © 2017 Iveta Škorpilová. All rights reserved.
 //
-
-
-/* 
-
- The Weather Service class retrieves weather data from OpenWeatherMap.
- 
- This class works with JSON using SwiftyJSON, following the OpenWeatherMap API.
- 
-*/
-
-// TODO: Add an enum for error codes. 
-// TODO: Use an enum for weather icons.
 
 
 import UIKit
@@ -36,26 +24,71 @@ class WeatherService {
     
     /** Formats an API call to the OpenWeatherMap service. Pass in a CLLocation to retrieve weather data for that location.  */
     func getWeatherForLocation(_ location: CLLocation) {
+        let coordinations = location.coordinate
+        
+        client?.currentWeather(coordinations) { result in
+            switch result {
+            case .Error(_, let error):
+                DispatchQueue.main.async(execute: { () -> Void in
+                    self.delegate?.weatherErrorWithMessage((error?.localizedDescription)!)
+                })
+            case .success(_, let dictionary):
+                 print("Received data: \(String(describing: dictionary))")
+                 if self.delegate != nil {
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        self.delegate?.setWeather(self.createWeather(dictionary: dictionary))
+                    })
+                 }
+            }
+        }
+        
         let lat = location.coordinate.latitude
         let lon = location.coordinate.longitude
         
         // Put together a URL With lat and lon
         let path = "http://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(appid)"
         
-        getWeatherWithPath(path)
+        //getWeatherWithPath(path)
     }
     
-    
-    /** Formats an API call to the OpenWeatherMap service. Pass in a string in the form City Name, Country. */
-    func getWeatherForCity(_ city: String) {
-        if let cityEscaped = city.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed) {
-            let path = "http://api.openweathermap.org/data/2.5/weather?q=\(cityEscaped)&appid=\(appid)"
-            
-            getWeatherWithPath(path)
+    func createWeather(dictionary: NSDictionary?) -> Weather {
+        var name, description, icon: String?
+        var temperature, clouds, tempMin, tempMax, humidity, pressure, windSpeed: Double?
+        
+        if let city = dictionary?["name"] as? String, let dict = dictionary?["main"] as? NSDictionary, let cloudsDict = dictionary?["clouds"] as? NSDictionary
+        {
+            name = city
+            temperature = dict["temp"] as? Double
+            clouds = cloudsDict["all"] as? Double
+            tempMin = dict["temp_min"] as? Double
+            tempMax = dict["temp_max"] as? Double
+            humidity = dict["humidity"] as? Double
+            pressure = dict["pressure"] as? Double
+            windSpeed = dict["temp"] as? Double
+            if let weatherList = dictionary?["weather"] as? NSArray,
+                let w1 = weatherList[0] as? NSDictionary {
+                description = w1["description"] as? String
+                icon = w1["icon"] as? String
+            }
         }
         
-       
+        let weather = Weather(
+            cityName: name!,
+            temp: temperature!,
+            description: description!,
+            icon: icon!,
+            clouds: clouds!,
+            tempMin: tempMin!,
+            tempMax: tempMax!,
+            humidity: humidity!,
+            pressure: pressure!,
+            windSpeed: windSpeed!
+        )
+        print(weather)
+        return weather
     }
+    
+
     
     /** This Method retrieves weather data from an API path. */
     func getWeatherWithPath(_ path: String) {
@@ -124,6 +157,7 @@ class WeatherService {
                     pressure: pressure!,
                     windSpeed: windSpeed!
                 )
+                print("DVOJKA \(weather)")
                 
                 // Check the delegate has been set.
                 if self.delegate != nil {

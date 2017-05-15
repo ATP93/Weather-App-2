@@ -2,20 +2,9 @@
 //  WeatherServiceDelegate.swift
 //  Weather-App-2
 //
-//  Created by mitchell hudson on 11/13/15.
-//  Copyright © 2015 mitchell hudson. All rights reserved.
+//  Created by Iveta Škorpilová on 14.05.17.
+//  Copyright © 2017 Iveta Škorpilová. All rights reserved.
 //
-
-
-/*
- 
- This protocol defines two methods used by the WeatherService class to share
- weather data with it's delegate. 
- 
- setWeather - returns a Weather object
- weatherErrorWithMessage - returns an error message
- 
- */
 
 
 import UIKit
