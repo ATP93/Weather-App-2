@@ -18,8 +18,6 @@ class ViewController: UIViewController,
     var weatherService = WeatherService(apiKey: "b733d502184df5ed5133054473f60b5d")
     var weather: Weather?
     
-    
-    
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var tempLabel: UILabel!
@@ -28,18 +26,14 @@ class ViewController: UIViewController,
     @IBOutlet weak var cityButton: UIButton!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
-    
     @IBAction func cityButtonTapped(_ sender: AnyObject) {
         print("City button")
         self.getGPSLocation()
     }
     
-    
-
     func getGPSLocation() {
         locationManager.startUpdatingLocation()
     }
-    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         print(locations)
@@ -51,24 +45,22 @@ class ViewController: UIViewController,
         print("location error \(error) \(String(describing: error._userInfo))")
     }
     
-    func weatherErrorWithMessage(_ message: String) {
-        let alert = UIAlertController(title: "Weather Service Error", message: message, preferredStyle: .alert)
+    func handleError(_ message: String) {
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let alert = UIAlertController(title: "Weather Service Error", message: message, preferredStyle: .alert)
         alert.addAction(ok)
         self.present(alert, animated: true, completion: nil)
     }
     
-    func setWeather(_ weather: Weather) {
-        let numberFormatter = NumberFormatter()
-        self.descriptionLabel.text = weather.description
-        
-        self.tempLabel.text = numberFormatter.string(from: NSNumber(value:weather.tempC))!
-        self.humidityLabel.text = "Humidity: \(numberFormatter.string(from: NSNumber(value:weather.humidity))!)%"
-        self.windLabel.text = "Wind: \(numberFormatter.string(from: NSNumber(value:weather.windSpeed))!)mph"
-        self.iconImageView.image = UIImage(named: weather.icon)
-        self.cityButton.setTitle(weather.cityName, for: UIControlState())
-        
+    func handleWeather(_ weather: Weather) {
         self.weather = weather
+        self.descriptionLabel.text = weather.description
+        let numberFormatter = NumberFormatter()
+        self.humidityLabel.text = "Humidity: \(numberFormatter.string(from: NSNumber(value:weather.humidity))!)%"
+        self.tempLabel.text = numberFormatter.string(from: NSNumber(value:weather.tempC))!
+        self.iconImageView.image = UIImage(named: weather.icon)
+        self.windLabel.text = "Wind: \(numberFormatter.string(from: NSNumber(value:weather.windSpeed))!)mph"
+        self.cityButton.setTitle(weather.cityName, for: UIControlState())
     }
 
     override func viewDidLoad() {

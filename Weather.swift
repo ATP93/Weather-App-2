@@ -43,7 +43,6 @@ struct Weather {
     }
 
     
-    
     init(cityName: String,
         temp: Double,
         description: String,

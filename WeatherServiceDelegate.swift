@@ -10,6 +10,6 @@
 import UIKit
 
 protocol WeatherServiceDelegate {
-    func setWeather(_ weather: Weather)
-    func weatherErrorWithMessage(_ message: String)
+    func handleWeather(_ weather: Weather)
+    func handleError(_ message: String)
 }

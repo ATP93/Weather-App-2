@@ -25,13 +25,13 @@ class WeatherService {
             switch result {
             case .Error(_, let error):
                 DispatchQueue.main.async(execute: { () -> Void in
-                    self.delegate?.weatherErrorWithMessage((error?.localizedDescription)!)
+                    self.delegate?.handleError((error?.localizedDescription)!)
                 })
             case .success(_, let dictionary):
                  print("Received data: \(String(describing: dictionary))")
                  if self.delegate != nil {
                     DispatchQueue.main.async(execute: { () -> Void in
-                        self.delegate?.setWeather(self.createWeather(dictionary: dictionary))
+                        self.delegate?.handleWeather(self.createWeather(dictionary: dictionary))
                     })
                  }
             }
